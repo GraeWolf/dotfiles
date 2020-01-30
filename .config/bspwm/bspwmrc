@@ -1,0 +1,43 @@
+#! /bin/sh
+
+# Autostart Programs
+
+sxhkd &
+~/.config/polybar/scripts/launch.sh
+~/bin/autostart.sh
+
+# Dual Monitor Setup
+
+bspc monitor HDMI-0 -d 1 2 3 4
+bspc monitor DVI-D-0 -d 5 6 7 8
+
+xrandr --output HDMI-0 --primary --output DVI-D-0 --right-of HDMI-0
+
+bspc config border_width         2
+bspc config window_gap          5
+bspc config top_padding 0
+bspc config bottom_padding 0
+bspc config left_padding 0
+bspc config right_padding 0
+bspc config focus_follows_pointer true
+
+bspc config split_ratio          0.52
+bspc config borderless_monocle   true
+bspc config gapless_monocle      true
+
+# Resize and move windows with mouse
+bspc config pointer_modifier mod4
+bspc config pointer_action1 move
+bspc config pointer_action2 none
+bspc config pointer_action3 resize_corner
+bspc config click_to_focus false
+
+#bspc rule -a Firefox desktop='^6' follow=off focus=off
+#bspc rule -a Steam desktop='^3'
+#bspc rule -a Lutris desktop='^3'
+#bspc rule -a obs desktop='^7'
+#bspc rule -a discord desktop='^9'
+#bspc rule -a evolution desktop='^2' focus=on
+#bspc rule -a spotify desktop='^10'
+#bspc rule -a vlc state=floating
+#bspc rule -a Surf state=tiled
