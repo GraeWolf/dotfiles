@@ -140,6 +140,11 @@ alias merge="xrdb -merge ~/.Xresources"
 alias pacman='sudo pacman --color auto'
 alias update='sudo pacman -Syyu'
 
+# portage emerge
+alias emerge='sudo emerge'
+
+alias vim='nvim'
+
 # Dotfiles
 alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
