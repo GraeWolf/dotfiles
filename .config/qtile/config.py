@@ -11,7 +11,7 @@ from libqtile.widget import LaunchBar
 from typing import List  # noqa: F401
 
 mod = "mod4"
-myTerm = "urxvt"
+myTerm = "alacritty"
 
 
 keys = [
@@ -56,17 +56,17 @@ keys = [
 ##### BAR COLORS #####
 # Uses Tartan color scheme in xcolors.net from terminal.sexy
 def init_colors():
-    return [["#2e3436", "#2e3436"], # panel background
-            ["#555753", "#555753"], # background for current screen tab
-            ["#dedede", "#dedede"], # font color for group names
-            ["#cc0000", "#cc0000"], # background color for layout widget
-            ["#2b2b2b", "#2b2b2b"], # background for other screen tabs
-            ["#8ae234", "#8ae234"], # dark green gradiant for other screen tabs
-            ["#50fa7b", "#50fa7b"], # background color for network widget
-            ["#4e9a06", "#4e9a06"], # background color for pacman widget
-            ["#75507b", "#75507b"], # background color for cmus widget
-            ["#3465a4", "#3465a4"], # background color for clock widget
-            ["#06989a", "#06989a"]] # background color for systray widget
+    return [["#2e3436", "#2e3436"], # 0 panel background
+            ["#555753", "#555753"], # 1 background for current screen tab
+            ["#dedede", "#dedede"], # 2 font color for group names
+            ["#cc0000", "#cc0000"], # 3 background color for layout widget
+            ["#2b2b2b", "#2b2b2b"], # 4 background for other screen tabs
+            ["#8ae234", "#8ae234"], # 5 dark green gradiant for other screen tabs
+            ["#50fa7b", "#50fa7b"], # 6 background color for network widget
+            ["#4e9a06", "#4e9a06"], # 7 background color for pacman widget
+            ["#75507b", "#75507b"], # 8 background color for cmus widget
+            ["#3465a4", "#3465a4"], # 9 background color for clock widget
+            ["#06989a", "#06989a"]] # 10 background color for systray widget
 
 
 def init_group_names():
@@ -112,117 +112,83 @@ def init_widgets_defaults():
                 padding=3,
                 background = colors[2])
 
-def init_widgets_list1():
-    widgets_list1 = [
+def init_widgets_list():
+    widgets_list = [
                 widget.GroupBox(
-                        visible_groups=['SYS', 'MAIL', 'AUD', 'GAM'],
-                        active= colors[2],
+                        visible_groups=['SYS', 'MAIL', 'AUD', 'GAM','WWW', 'DOC', 'CHAT', 'MUS'],
+                        fontsize = 16,
+                        active = colors[5],
                         inactive = colors[2],
                         highlight_method = "block",
-                        foreground = colors[2],
+                        this_current_screen_border = colors[1],
+                        this_screen_border = colors [5],
+                        foreground = colors[5],
                         background = colors[0]),
                 widget.Prompt(),
                 widget.WindowName(
+                        fontsize = 12,
                         foreground = colors[5],
                         background = colors[0],
                         padding = 5),
                 widget.CurrentLayout(
+                        fontsize = 16,
                         foreground = colors[2],
-                        background = colors[7],
+                        background = colors[0],
                         padding =5),
                 widget.TextBox(
+                        fontaize = 16,
                         text="🕪",
                         padding = 6,
-                        foreground = colors[2],
-                        background = colors[8]),
-                widget.Volume(
-                        foreground = colors[2],
-                        background = colors[8],),
-                widget.TextBox(
-                        text="⟳",
-                        foreground = colors[2],
-                        background = colors[7]),
-                widget.Pacman(
-                        update_interval = 1800,
-                        foreground = colors[2],
-                        background = colors[7]),
-                widget.Systray(
-                        background=colors[10],
-                        padding = 5),
-                widget.Clock(
-                        foreground = colors[2],
-                        background = colors[9],
-                        format="%A, %B %d - %H:%M"),
-                widget.LaunchBar(progs=[
-                        ('⏾', 'systemctl suspend', 'put computer to sleep')],
-                        background = colors[0],
-                        padding = 5, 
-                        #default_icon='/usr/share/icons/Adwaita/24x24/status/night-light-symbolic.symbolic.png'
-                        ),
-                widget.Sep(
-                        linewidth = 0,
-                        padding = 5,
-                        background = colors[0],
-                        ), 
-                    ]
-    return widgets_list1
-    
-def init_widgets_list2():
-    widgets_list2 = [
-                widget.GroupBox(
-                        visible_groups=['WWW', 'DOC', 'CHAT', 'MUS'],
-                        active= colors[2],
-                        inactive = colors[2],
-                        highlight_method = "block",
                         foreground = colors[2],
                         background = colors[0]),
-                widget.WindowName(
-                        foreground = colors[5],
-                        background = colors[0],
-                        padding = 5),
-                widget.CurrentLayout(
-                        foreground = colors[2],
-                        background = colors[7],
-                        padding =5),
-                widget.TextBox(
-                        text="🕪",
-                        padding = 6,
-                        foreground = colors[2],
-                        background = colors[8]),
                 widget.Volume(
+                        fontsize = 16,
                         foreground = colors[2],
-                        background = colors[8],),
+                        background = colors[0],),
+                #widget.TextBox(
+                #        text="⟳",
+                #        foreground = colors[2],
+                #        background = colors[0]),
+                #widget.Pacman(
+                #        update_interval = 1800,
+                #        foreground = colors[2],
+                #        background = colors[0]),
+                widget.Systray(
+                        background=colors[0],
+                        padding = 5),
                 widget.Clock(
+                        fontsize = 16,
                         foreground = colors[2],
-                        background = colors[9],
-                        format="%A, %B %d - %H:%M"),
-                widget.LaunchBar(progs=[
-                        ('⏾', 'systemctl suspend', 'put computer to sleep')],
                         background = colors[0],
-                        padding = 5, 
+                        format="%A, %B %d - %H:%M"),
+                #widget.LaunchBar(progs=[
+                #        ('⏾', 'systemctl suspend', 'put computer to sleep')],
+                #        background = colors[0],
+                #        padding = 5, 
                         #default_icon='/usr/share/icons/Adwaita/24x24/status/night-light-symbolic.symbolic.png'
-                        ),
+                #        ),
                 widget.Sep(
                         linewidth = 0,
                         padding = 5,
                         background = colors[0],
                         ), 
                     ]
-    return widgets_list2 
+    return widgets_list
+    
+ 
 
 ##### SCREENS #####
 
 def init_widgets_screen1():
-	widgets_screen1 = init_widgets_list1()
+	widgets_screen1 = init_widgets_list()
 	return widgets_screen1
 	
-def init_widgets_screen2():
-	widgets_screen2 = init_widgets_list2()
-	return widgets_screen2
+#def init_widgets_screen2():
+#	widgets_screen2 = init_widgets_list2()
+#	return widgets_screen2
 	
 def init_screens():
-    return [Screen(top=bar.Bar(widgets=init_widgets_screen1(), opacity=0.95, size=20)),
-            Screen(top=bar.Bar(widgets=init_widgets_screen2(), opacity=0.95, size=20))]
+    return [Screen(top=bar.Bar(widgets=init_widgets_screen1(), opacity=0.95, size=25))]
 
 # Drag floating layouts.
 mouse = [
@@ -261,12 +227,12 @@ focus_on_window_activation = "smart"
 colors = init_colors()
 screens = init_screens()
 widget_defaults = init_widgets_defaults()
-widgets_list1 = init_widgets_list1()
-widgets_list2 = init_widgets_list2()
+widgets_list = init_widgets_list()
+#widgets_list2 = init_widgets_list2()
 layout_theme = init_layout_theme()
 layouts = init_layouts()
 widgets_screen1 = init_widgets_screen1()
-widgets_screen2 = init_widgets_screen2()
+#widgets_screen2 = init_widgets_screen2()
 
 
 @hook.subscribe.startup_once
